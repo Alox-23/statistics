@@ -1,11 +1,11 @@
 CC = gcc
-CFLAGS = -std=c11 -Wa3
+CFLAGS = -std=c11 -Wall
 LDFLAGS = -lm
 
 TARGET = bin/main
 
 SOURCES = src/main.c \
-					src/relfreq.c
+					src/secr.c
 
 HEADERS = $(SOURCES:.c=.h)
 OBJECTS = $(SOURCES:.c=.o)
