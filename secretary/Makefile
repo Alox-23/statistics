@@ -6,7 +6,9 @@ TARGET = bin/main
 
 SOURCES = src/main.c \
 					src/list.c \
-					src/glbs.c
+					src/glbs.c \
+					src/print.c \
+					src/sim.c
 
 HEADERS = $(SOURCES:.c=.h)
 OBJECTS = $(SOURCES:.c=.o)

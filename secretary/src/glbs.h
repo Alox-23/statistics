@@ -12,7 +12,6 @@
 
 typedef struct {
   list *secr_list;
-  list *fail_list;
   list *afk_list;
   uint32_t sec_list_size;
   uint32_t depth_per_k;
