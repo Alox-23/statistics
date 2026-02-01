@@ -21,7 +21,7 @@ list* init_list(uint32_t size){
 
 void clean_list(list* s){
   if (!s){
-    printf("Invalid list pointer in destroy_list()!\n");
+    printf("Invalid list pointer in clean_list()!\n");
     return;
   }
 
@@ -97,4 +97,15 @@ void print_list(list* s){
     if (i != s->size-1) printf(", ");
   }
   printf("]\n");
+}
+
+void null_list(list* s){
+  if (!s){
+    printf("Invalid list pointer during null_list!");
+    return;
+  }
+
+  for (uint32_t i = 0; i < s->size; i++){
+    s->values[i] = 0;
+  }
 }

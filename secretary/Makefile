@@ -5,7 +5,8 @@ LDFLAGS = -lm
 TARGET = bin/main
 
 SOURCES = src/main.c \
-					src/list.c
+					src/list.c \
+					src/glbs.c
 
 HEADERS = $(SOURCES:.c=.h)
 OBJECTS = $(SOURCES:.c=.o)
