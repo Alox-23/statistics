@@ -6,6 +6,7 @@
 #include <stdbool.h>
 #include <stdio.h>
 #include <time.h>
+#include <string.h>
 
 #include "list.h"
 
@@ -15,10 +16,15 @@ typedef struct {
   list *afk_list;
   uint32_t sec_list_size;
   uint32_t depth_per_k;
+
+  char *user_input;
+  uint32_t user_input_size;
 } global_state;
 
 global_state* init_gs(uint32_t sec_list_size, uint32_t depth_per_k);
 int clean_gs(global_state* gs);
 void restart_gs(global_state** gs, uint32_t sec_list_size, uint32_t depth_per_k);
+
+char* safe_get(global_state *gs);
 
 #endif
