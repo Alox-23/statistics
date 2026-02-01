@@ -18,7 +18,7 @@ int main(){
 
   global_state* gs = init_gs(SEC_LIST_SIZE, DEPTH_PER_K);
   if (!gs) return clean_gs(gs);
-
+0
   bool running = true;
   while (running){
     print_clear();
