@@ -18,14 +18,14 @@ int main(){
 
   global_state* gs = init_gs(SEC_LIST_SIZE, DEPTH_PER_K);
   if (!gs) return clean_gs(gs);
-0
+  
   bool running = true;
   while (running){
     print_clear();
     print_main();
     char* user_input = safe_get(gs);
     char choice;
-    if (!user_input) choice = 'ff';
+    if (!user_input || user_input[1] != '\0') choice = 'ff';
     else choice = user_input[0];
    
     switch (choice){
@@ -38,9 +38,12 @@ int main(){
         break;
       case '2':
         print_settings_menu();
+        user_input = safe_get(gs);
+        handle_settings_change(gs);
         break;
       case '3':
-        print_help_info();
+        print_help_info(gs);
+        user_input = safe_get(gs);
         break;
       case '0':
         print_bye();

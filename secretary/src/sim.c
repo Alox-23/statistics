@@ -12,7 +12,7 @@ void run_simulation(global_state *gs){
       float f = traverse_list(gs->secr_list, k);
       average_f_for_k += f;
     }
-    average_f_for_k /= gs->depth_per_k;
+    average_f_for_k = average_f_for_k / gs->depth_per_k * 100.0f;
     gs->afk_list->values[k] = average_f_for_k;
     if (k % 10 == 0) printf("Simulated %d, k-values...\n", k);
   }

@@ -39,16 +39,36 @@ void print_settings_menu() {
   printf("\n┌─────────────────────────────────────┐\n");
   printf("│           CONFIGURATION             │\n");
   printf("├─────────────────────────────────────┤\n");
+  printf("│  Instructions:                      │\n");
+  printf("│                                     │\n");
   printf("│  1. Set candidate pool size (n)     │\n");
-  printf("│  2. Set sampling depth (k)          │\n");
-  printf("│  3. Set number of iterations        │\n");
-  printf("│  4. View current parameters         │\n");
-  printf("│  5. Reset to defaults               │\n");
-  printf("│  0. Back to main menu               │\n");
+  printf("│  2. Set number of iterations        │\n");
+  printf("│                                     │\n");
+  printf("│  Press Enter to start               │\n");
   printf("└─────────────────────────────────────┘\n");
 }
 
-void print_help_info() {
+void handle_settings_change(global_state *gs){
+  printf("\n┌─────────────────────────────────────┐\n");
+  printf("│           CONFIGURATION             │\n");
+  printf("├─────────────────────────────────────┤\n");
+  printf("│  Enter number of Candidates         │\n");
+  printf("└─────────────────────────────────────┘\n");
+  char* candidate_input = safe_get(gs);
+  uint32_t candidate_count = atoi(candidate_input);
+  print_clear();
+  printf("\n┌─────────────────────────────────────┐\n");
+  printf("│           CONFIGURATION             │\n");
+  printf("├─────────────────────────────────────┤\n");
+  printf("│  Enter number of Iterations         │\n");
+  printf("└─────────────────────────────────────┘\n");
+  char* iter_input = safe_get(gs);
+  uint32_t iter_count = atoi(iter_input);
+ 
+  restart_gs(&gs, candidate_count, iter_count);
+}
+
+void print_help_info(global_state *gs) {
   printf("\n┌─────────────────────────────────────┐\n");
   printf("│          HELP & INFORMATION         │\n");
   printf("├─────────────────────────────────────┤\n");
@@ -62,9 +82,10 @@ void print_help_info() {
   printf("│  • Success rate: ~37%%               │\n");
   printf("│                                     │\n");
   printf("│  Parameters:                        │\n");
-  printf("│  • n: Total candidates              │\n");
-  printf("│  • k: Sample size (rejection phase) │\n");
-  printf("│  • Optimal k = n / 2.718            │\n");
+  printf("│  • Candidates (n): %-10u       │\n", gs->sec_list_size);
+  printf("│  • Sampling depth: %-10u       │\n", gs->depth_per_k);
+  printf("│                                     │\n");
+  printf("│  Press Enter to continue...         │\n");
   printf("└─────────────────────────────────────┘\n");
 }
 
@@ -82,7 +103,7 @@ void print_simulation_results(global_state *gs){
   printf("├─────────────────────────────────────┤\n");
   printf("│                                     │\n");
   for (uint32_t i = 0; i < gs->sec_list_size; i++){
-    printf("│  • [%-2u] : %-3f                 │\n", i, gs->afk_list->values[i]);
+    printf("│  • [%-2u] : %-.2f                      │\n", i, gs->afk_list->values[i]);
   }
   printf("│                                     │\n");
   printf("│  Press Enter to continue...         │\n");
